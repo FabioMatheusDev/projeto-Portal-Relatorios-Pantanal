@@ -32,19 +32,33 @@ public static class DatabaseSeed
             await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        if (!await db.Users.AnyAsync(cancellationToken).ConfigureAwait(false))
+        await EnsureAdminUserAsync(db, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task EnsureAdminUserAsync(AppDbContext db, CancellationToken cancellationToken)
+    {
+        var admin = await db.Users.FirstOrDefaultAsync(u => u.Username == "admin", cancellationToken)
+            .ConfigureAwait(false);
+        if (admin is null)
         {
             await db.Users.AddAsync(
                 new User
                 {
                     Id = Guid.NewGuid(),
-                    Username = "demo.admin",
-                    Name = "Administrador Demo",
-                    Email = "admin@mock.local",
+                    Username = "admin",
+                    Name = "Administrador",
+                    Email = "admin@local",
                     IsAdmin = true
                 },
                 cancellationToken).ConfigureAwait(false);
             await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            return;
         }
+
+        if (admin.IsAdmin)
+            return;
+
+        admin.IsAdmin = true;
+        await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 }

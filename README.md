@@ -52,7 +52,7 @@ Ajuste `src/environments/environment.development.ts` se a API não estiver em `h
 
 ## Desenvolvimento sem AD / SAP / HANA
 
-- `Ldap:UseMock: true` — login aceita usuários mock; use `demo.admin` / qualquer senha para testar administrador (seed no banco InMemory).
+- `Ldap:UseMock: true` — login mock: usuário **`admin`** / senha **`admin`** (administrador; criado pelo seed). Outros nomes aceitam qualquer senha.
 - `Sap:UseMockResponses: true` — evita chamadas reais ao Service Layer.
 - `Database:UseInMemoryDatabase: true` — dados de permissões em memória (reinicia ao parar o processo).
 

@@ -21,6 +21,9 @@ public sealed class ActiveDirectoryAuthService : IActiveDirectoryAuthService
     {
         if (_options.UseMock)
         {
+            if (string.Equals(username.Trim(), "admin", StringComparison.OrdinalIgnoreCase))
+                return Task.FromResult(password == "admin");
+
             _logger.LogInformation("LDAP mock: validação aceita para {User}", username);
             return Task.FromResult(true);
         }
@@ -54,6 +57,9 @@ public sealed class ActiveDirectoryAuthService : IActiveDirectoryAuthService
         if (_options.UseMock)
         {
             var u = username.Trim();
+            if (string.Equals(u, "admin", StringComparison.OrdinalIgnoreCase))
+                return Task.FromResult<AdUserInfo?>(new AdUserInfo("admin", "Administrador", "admin@local"));
+
             return Task.FromResult<AdUserInfo?>(new AdUserInfo(u, $"Usuário {u}", $"{u}@mock.local"));
         }
 
@@ -92,7 +98,7 @@ public sealed class ActiveDirectoryAuthService : IActiveDirectoryAuthService
         {
             IReadOnlyList<AdUserInfo> mock =
             [
-                new("demo.admin", "Administrador Demo", "admin@mock.local"),
+                new("admin", "Administrador", "admin@local"),
                 new("demo.user", "Usuário Demo", "user@mock.local")
             ];
             return Task.FromResult(mock);
