@@ -42,8 +42,9 @@
 *.idb
 *.pdb
 
-# Kernel Module Compile Results
-*.mod*
+# Kernel Module Compile Results (não use *.mod* — ignora arquivos *.models.ts)
+*.mod
+*.mod.c
 *.cmd
 .tmp_versions/
 modules.order

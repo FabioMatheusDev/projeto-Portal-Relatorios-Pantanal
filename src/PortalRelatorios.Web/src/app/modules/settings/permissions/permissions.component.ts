@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { AdUserRow, PermissionMatrix } from '../../../core/models/auth.models';
 
+type SectorPermissionRow = PermissionMatrix['sectors'][number];
+
 @Component({
   selector: 'app-permissions',
   standalone: true,
@@ -63,7 +65,7 @@ export class PermissionsComponent implements OnInit {
     const m = this.matrix();
     const userId = this.selectedUserId();
     if (!m || !userId) return;
-    const next = m.sectors.map((s) =>
+    const next = m.sectors.map((s: SectorPermissionRow) =>
       s.sectorId === sectorId ? { ...s, canView: !canView } : s,
     );
     this.matrix.set({ ...m, sectors: next });
@@ -76,7 +78,10 @@ export class PermissionsComponent implements OnInit {
     this.http
       .put(`${environment.apiUrl}/permissions/matrix`, {
         userId,
-        permissions: m.sectors.map((s) => ({ sectorId: s.sectorId, canView: s.canView })),
+        permissions: m.sectors.map((s: SectorPermissionRow) => ({
+          sectorId: s.sectorId,
+          canView: s.canView,
+        })),
       })
       .subscribe({
         next: () => this.loadMatrix(userId),
