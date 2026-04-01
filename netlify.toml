@@ -5,8 +5,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # URL pública da API ASP.NET (obrigatório no Netlify), ex.: https://sua-api.azurewebsites.net/api
-  # API_PUBLIC_URL = "https://..."
+  # Recomendado: API_PUBLIC_URL = URL absoluta da API (ex.: https://sua-api.azurewebsites.net/api)
 
 # SPA: todas as rotas entregam index.html (evita 404 ao atualizar /login etc.)
 [[redirects]]

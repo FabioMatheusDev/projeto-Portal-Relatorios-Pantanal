@@ -1,7 +1,8 @@
 /**
  * Substitui __API_PUBLIC_URL__ em environment.ts antes do ng build.
- * No Netlify: defina API_PUBLIC_URL (URL pública do ASP.NET, com /api).
- * Local: sem NETLIFY, usa http://localhost:5248/api se API_PUBLIC_URL não estiver definida.
+ * - API_PUBLIC_URL (Netlify): URL absoluta da API ASP.NET, terminando em /api.
+ * - Sem variável no Netlify: usa /api (build ok; configure a variável para o login funcionar).
+ * - Local: http://localhost:5248/api se API_PUBLIC_URL não estiver definida.
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
@@ -17,14 +18,13 @@ let apiUrl;
 if (fromEnv) {
   apiUrl = fromEnv;
 } else if (isNetlify) {
-  console.error(`
-[build] Defina API_PUBLIC_URL nas variáveis de ambiente do site Netlify
-  (Site configuration → Environment variables).
-
-Exemplo de valor (ajuste para o host onde a API ASP.NET está publicada):
-  https://seu-app.azurewebsites.net/api
-`);
-  process.exit(1);
+  // Permite o build sem variável; login só funciona após definir API_PUBLIC_URL + redeploy
+  // (URL absoluta da API ASP.NET, ex.: https://sua-api.azurewebsites.net/api).
+  console.warn(
+    '\n[patch-api-url] API_PUBLIC_URL não definida no Netlify — usando /api. O login falhará até você ' +
+      'criar a variável (Site → Environment variables) com a URL pública da API e publicar de novo.\n',
+  );
+  apiUrl = '/api';
 } else {
   apiUrl = 'http://localhost:5248/api';
 }
