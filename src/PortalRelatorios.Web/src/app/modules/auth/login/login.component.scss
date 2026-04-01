@@ -1,0 +1,33 @@
+.login-video {
+  pointer-events: none;
+}
+
+/* Camada atrás do vídeo (visível no carregamento / fallback) */
+.login-bg-fallback {
+  background: linear-gradient(125deg, #0f172a 0%, #064e3b 40%, #0c4a6e 70%, #0f172a 100%);
+  background-size: 400% 400%;
+  animation: bgShift 18s ease infinite;
+}
+
+.login-bg-fallback::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.6;
+}
+
+@keyframes bgShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

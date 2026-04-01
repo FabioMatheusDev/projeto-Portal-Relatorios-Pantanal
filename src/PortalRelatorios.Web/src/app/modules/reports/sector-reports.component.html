@@ -1,0 +1,17 @@
+<div class="space-y-6">
+  <div>
+    <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100">Setor: {{ slug() }}</h2>
+    <p class="text-sm text-slate-500">Área reservada para listagem de relatórios, filtros e exportação (Excel / PDF).</p>
+  </div>
+  <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50/80 p-8 text-center text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900/40">
+    Nenhum relatório vinculado ainda. Configure endpoints no Service Layer e mapeie em <code class="rounded bg-slate-200 px-1 py-0.5 text-xs dark:bg-slate-800">ReportEndpoints</code>.
+  </div>
+  <div class="flex flex-wrap gap-3">
+    <button type="button" disabled class="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-400 dark:border-slate-700 dark:bg-slate-900">
+      Exportar Excel
+    </button>
+    <button type="button" disabled class="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-400 dark:border-slate-700 dark:bg-slate-900">
+      Exportar PDF
+    </button>
+  </div>
+</div>

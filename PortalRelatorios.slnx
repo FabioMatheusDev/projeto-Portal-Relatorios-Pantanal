@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PortalRelatorios.API/PortalRelatorios.API.csproj" />
+    <Project Path="src/PortalRelatorios.Application/PortalRelatorios.Application.csproj" />
+    <Project Path="src/PortalRelatorios.CrossCutting/PortalRelatorios.CrossCutting.csproj" />
+    <Project Path="src/PortalRelatorios.Domain/PortalRelatorios.Domain.csproj" />
+    <Project Path="src/PortalRelatorios.Infrastructure/PortalRelatorios.Infrastructure.csproj" />
+  </Folder>
+</Solution>

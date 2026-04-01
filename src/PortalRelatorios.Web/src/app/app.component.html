@@ -1,0 +1,19 @@
+@if (loading.pending() > 0) {
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/20 backdrop-blur-[1px]"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="h-10 w-10 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent"></div>
+  </div>
+}
+
+@if (toast.message(); as msg) {
+  <div
+    class="fixed bottom-6 right-6 z-[101] max-w-sm rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+  >
+    {{ msg }}
+  </div>
+}
+
+<router-outlet />

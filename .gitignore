@@ -53,3 +53,24 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Visual Studio / MSBuild
+.vs/
+*.user
+*.suo
+*.userosscache
+
+# .NET build output
+**/bin/
+**/obj/
+**/out/
+[Bb]uild/
+[Ll]ogs/
+
+# Node / Angular (também em subpastas)
+**/node_modules/
+**/.angular/cache
+
+# Secrets locais (não versionar)
+**/appsettings.*.local.json
+**/secrets.json

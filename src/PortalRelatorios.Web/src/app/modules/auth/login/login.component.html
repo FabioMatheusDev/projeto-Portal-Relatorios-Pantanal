@@ -1,0 +1,70 @@
+<div class="relative min-h-screen overflow-hidden flex items-center justify-center px-4">
+  <!-- Fallback (gradiente) atrás; vídeo por cima em assets/videos/ -->
+  <div class="login-bg-fallback absolute inset-0 z-0"></div>
+  <video
+    #loginVideo
+    class="login-video absolute inset-0 z-0 h-full min-h-full w-full min-w-full object-cover"
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true"
+    (loadeddata)="onLoginVideoReady(loginVideo)"
+  >
+    <source src="assets/videos/login-screen-pantanal-agricola.mp4" type="video/mp4" />
+  </video>
+  <div class="absolute inset-0 z-[1] bg-black/55 backdrop-blur-[2px]"></div>
+
+  <div class="relative z-10 w-full max-w-md">
+    <div
+      class="rounded-2xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl transition-all duration-300"
+    >
+      <div class="mb-8 flex flex-col items-center gap-4">
+        <img
+          [src]="brandLogoSrc()"
+          (error)="onBrandLogoError()"
+          alt="Pantanal Agrícola"
+          class="h-14 w-auto max-w-[min(100%,280px)] object-contain md:h-16"
+        />
+        <p class="text-center text-sm text-slate-200/90">Acesso ao portal de relatórios</p>
+      </div>
+
+      <form class="space-y-5" (ngSubmit)="submit()" [formGroup]="form">
+        @if (error()) {
+          <div class="rounded-lg bg-red-500/20 px-3 py-2 text-sm text-red-100">{{ error() }}</div>
+        }
+        <div>
+          <label class="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-300">Usuário</label>
+          <input
+            formControlName="username"
+            autocomplete="username"
+            class="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none ring-emerald-500/40 focus:ring-2 transition-shadow"
+            placeholder="domínio\\usuário ou login"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-300">Senha</label>
+          <input
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+            class="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none ring-emerald-500/40 focus:ring-2 transition-shadow"
+            placeholder="••••••••"
+          />
+        </div>
+        <button
+          type="submit"
+          [disabled]="submitting()"
+          class="w-full rounded-xl bg-emerald-600 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/40 transition hover:bg-emerald-500 disabled:opacity-60"
+        >
+          @if (submitting()) {
+            <span>Entrando…</span>
+          } @else {
+            <span>Entrar</span>
+          }
+        </button>
+      </form>
+    </div>
+    <p class="mt-6 text-center text-xs text-slate-400">© Pantanal Agrícola — tecnologia e agronegócio</p>
+  </div>
+</div>

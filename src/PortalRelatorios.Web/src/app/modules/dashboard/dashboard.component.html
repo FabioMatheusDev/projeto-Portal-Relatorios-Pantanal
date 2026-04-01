@@ -1,0 +1,39 @@
+<div class="space-y-8">
+  <div>
+    <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100">Visão geral</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400">Indicadores simulados — conecte ao SAP Service Layer quando os endpoints estiverem prontos.</p>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    @for (k of kpis; track k.label) {
+      <div
+        class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/60"
+      >
+        <p class="text-xs font-medium uppercase tracking-wide text-slate-500">{{ k.label }}</p>
+        <p class="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">{{ k.value }}</p>
+        <p class="mt-1 text-sm" [class]="k.tone">{{ k.delta }} vs. mês anterior</p>
+      </div>
+    }
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-2">
+    <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+      <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-100">Volume semanal (mock)</h3>
+      <div class="mt-6 flex h-48 items-end gap-2">
+        @for (h of bars; track $index) {
+          <div
+            class="flex-1 rounded-t-lg bg-gradient-to-t from-emerald-700 to-emerald-400 opacity-90 transition hover:opacity-100"
+            [style.height.%]="h"
+          ></div>
+        }
+      </div>
+    </div>
+    <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+      <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-100">Mix por canal (mock)</h3>
+      <div class="mt-8 flex items-center justify-center">
+        <div class="relative h-44 w-44 rounded-full border-[12px] border-emerald-500/30 border-t-emerald-500 border-r-sky-500"></div>
+      </div>
+      <p class="mt-4 text-center text-xs text-slate-500">Substitua por gráficos reais (Chart.js / ngx-charts).</p>
+    </div>
+  </div>
+</div>
