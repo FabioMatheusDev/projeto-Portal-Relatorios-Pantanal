@@ -1,0 +1,13 @@
+# Netlify: Angular 19 (output em dist/.../browser). Ajuste no painel não é necessário se este arquivo estiver no repo.
+[build]
+  command = "cd src/PortalRelatorios.Web && npm ci && npx ng build --configuration production"
+  publish = "src/PortalRelatorios.Web/dist/portal-relatorios-web/browser"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA: todas as rotas entregam index.html (evita 404 ao atualizar /login etc.)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
